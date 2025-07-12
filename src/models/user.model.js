@@ -43,6 +43,7 @@ const userSchema = new mongoose.Schema({
     }
 }, {timestamps: true})
 
+//pre is a hook or middelware which executes before passing the reference to next(), this method ensures that password only hashes when it is modified
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
@@ -50,10 +51,12 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
+//method checks if the password if correct
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
 
+//this method generates access token using jwt
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign(
         {
@@ -68,6 +71,8 @@ userSchema.methods.generateAccessToken = function(){
         }
     )
 }
+
+//this method generates refresh token using jwt
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         {
