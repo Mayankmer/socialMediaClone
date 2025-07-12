@@ -17,5 +17,13 @@ app.use(express.urlencoded({extended: true, limit:"16kb"}))
 //static is used to store the assets like favicong or images
 app.use(express.static("public"))
 
+app.use(cookieParser())
+
+//import routes
+import userRouter from './routes/user.routes.js'
+
+//routes declaration
+
+app.use("/api/v1/users", userRouter)
 
 export {app}
