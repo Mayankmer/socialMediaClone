@@ -3,9 +3,9 @@ import fs from "fs";
 
 // Configuration
 cloudinary.config({ 
-    cloud_name: 'mayank', 
-    api_key: '571122192221735', 
-    api_secret: 'DHG2vLxd8cMKdm5YzwXVXicRGTxOfv0AgmWIg268cBNyWGvrgVukxmz09v1wH93x'
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API_KEY, 
+    api_secret: process.env.CLOUDINARY_API_SECRET
  // Click 'View API Keys' above to copy your API secret
 });
 
