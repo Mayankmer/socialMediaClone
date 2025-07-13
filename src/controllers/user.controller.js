@@ -16,7 +16,6 @@ const registerUser = asyncHandler(async(req, res) => {
         step9: return response
     */
    const {userName, email, fullName, password} = req.body
-   console.log(userName, email, password)
 
 //    if(fullName === ""){
 //     throw new ApiError(400, "fullname is required")
@@ -38,7 +37,12 @@ const registerUser = asyncHandler(async(req, res) => {
 
     //getting the local path of the avatar and cover image file
     const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    // const coverImageLocalPath = req.files?.coverImage[0]?.path;
+
+    let coverImageLocalPath="";
+    if(req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length >0){
+        coverImageLocalPath = req.files.coverImage[0].path;
+    }
 
     if(!avatarLocalPath){
         throw new ApiError(400, "avatar file is required")
